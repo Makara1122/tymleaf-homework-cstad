@@ -1,17 +1,16 @@
 package org.example.todolist.controller;
 
-import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import org.example.todolist.model.Todo;
 import org.example.todolist.model.service.TodoService;
-import org.example.todolist.repository.TodoDataRepository;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,5 +49,15 @@ public class TodoController {
         model.addAttribute("todos", todoService.getAllTodos());
 //        System.out.println(todo);
         return "redirect:/";
+    }
+    @GetMapping("/todo/new")
+    public String newTodo(Model model) {
+        Todo todo =  new Todo();
+        todo.setId(new Random().nextInt(1000));
+        todo.setUuid(UUID.randomUUID().toString());
+        todo.setCreatedAt(LocalDateTime.now());
+        model.addAttribute("newTodo", todo);
+        todoService.addNewTodo(todo);
+        return "new";
     }
 }
