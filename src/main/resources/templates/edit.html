@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo edit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+</head>
+<body>
+
+
+<form action="#" class="max-w-md mx-auto mt-12" th:object="${todo}"  th:action="@{/todoEdit1}" method="POST">
+    <label>
+        <input th:value="${todo.id}" th:field="*{id}" hidden="hidden"/>
+    </label>
+    <div class="relative z-0 w-full mb-5 group">
+        <input th:placeholder="${todo.task}" th:field="*{task}"  type="text" name="task" id="task" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="task" class="peer-focus:font-medium text-yellow-500 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Task Name</label>
+    </div>
+    <!-- Done status -->
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Done status</label>
+    <select th:field="*{done}"  id="done" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option th:value="${false}">False</option>
+        <option th:value="${true}" >True</option>
+    </select>
+    <!-- Description -->
+    <label>
+        <input th:value="${todo.uuid}" th:field="*{uuid}" hidden="hidden"/>
+    </label>
+    <label>
+        <input th:value="${todo.createdAt}" th:field="*{createdAt}" hidden="hidden"/>
+    </label>
+    <label class="mt-4 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your task description</label>
+    <textarea th:placeholder="${todo.description}" th:field="*{description}"  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your task description here..."></textarea>
+    <button
+            onclick="return confirm('Are you sure you want to submit?')"
+            type="submit" class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+</form>
+
+</body>
+</html>
