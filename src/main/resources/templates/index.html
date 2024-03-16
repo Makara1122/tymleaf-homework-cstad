@@ -40,9 +40,12 @@
     </div>
 </form>
 <section class="m-4 flex flex-row justify-center">
-    <button type="button" class="w-64 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">
-        <a href="/todo/new">Add New Task</a>
-    </button>
+    <a href="/todo/new">
+        <button type="button" class="w-64 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">
+            Add New Task
+        </button>
+    </a>
+
 </section>
  <div class="relative overflow-x-auto m-4">
      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -112,10 +115,10 @@
              </td>
              <td class="px-6 py-4 flex flex-row gap-4" >
                  <!--                 $2999-->
-                 <a th:href="@{'/todo/edit?id=' + ${mess.uuid}}" th:name="uuid" class="text-blue-500 ">Edit</a>
+                 <a th:href="@{'/todo/edit/' + ${mess.uuid}}" th:name="uuid" class="text-blue-500 ">Edit</a>
 <!--                 delete-->
                  <!--                 $2999-->
-                 <a th:href="@{'/todo/deleted?id=' + ${mess.uuid}}" th:name="uuid" class="text-red-500 "
+                 <a th:href="@{'/todo/delete/' + ${mess.uuid}}" th:name="uuid" class="text-red-500 "
                     onclick="return confirm('Are you sure you want to delete this item?');"
                  >Delete</a>
              </td>

@@ -29,8 +29,8 @@ public class TodoController {
         model.addAttribute("tasks",todoService.search(task));
         return "result";
     }
-    @GetMapping("/todo/edit")
-    public String edit(@RequestParam(value = "id") String id, Model model) {
+    @GetMapping("/todo/edit/{id}")
+    public String edit(@PathVariable String id, Model model) {
         Todo todo = todoService.getTodoById(id);
         oldTodo = todo;
         model.addAttribute("todo", todo);
@@ -43,8 +43,8 @@ public class TodoController {
 //        System.out.println(todo);
         return "redirect:/";
     }
-    @GetMapping("/todo/deleted")
-    public String deleteToById(@RequestParam(value = "id") String id, Model model) {
+    @GetMapping("/todo/delete/{id}")
+    public String deleteToById(@PathVariable String id, Model model) {
         todoService.deleteTodoById(id);
         model.addAttribute("todos", todoService.getAllTodos());
 //        System.out.println(todo);
